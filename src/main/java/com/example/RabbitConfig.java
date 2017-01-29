@@ -21,12 +21,19 @@ public class RabbitConfig {
 	@Bean
 	RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-		rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+		//rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
 		return rabbitTemplate;
 	}
 
 	@Bean
 	public AmqpAdmin amqpAdmin() {
-		return new RabbitAdmin(connectionFactory());
+		RabbitAdmin rabbitAdmin = new RabbitAdmin(connectionFactory());
+		return rabbitAdmin;
 	}
+
+	@Bean
+	public Jackson2JsonMessageConverter converter() {
+		return new Jackson2JsonMessageConverter();
+	}
+
 }
